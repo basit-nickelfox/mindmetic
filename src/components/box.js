@@ -7,7 +7,10 @@ const Box = (props) => {
   const navigation = useNavigation();
   return (
     <TouchableOpacity
-      style={[styles.outline]}
+      style={[
+        styles.outline,
+        props.border === false ? { borderTopWidth: 0 } : { borderTopWidth: 1 },
+      ]}
       onPress={() => navigation.navigate(props.move)}
     >
       <View>
@@ -25,7 +28,7 @@ const styles = StyleSheet.create({
   outline: {
     color: "white",
     borderColor: "#44484a",
-    borderBottomWidth: 1,
+    borderTopWidth: 1,
     alignItems: "stretch",
     flex: 1,
     justifyContent: "center",
@@ -38,7 +41,7 @@ const styles = StyleSheet.create({
     color: "#FAFEFF",
     alignSelf: "center",
     fontWeight: "bold",
-    fontSize: 15,
+    fontSize: 12,
     fontFamily: "sans-serif-thin",
     marginTop: 10,
     // borderColor: "red",

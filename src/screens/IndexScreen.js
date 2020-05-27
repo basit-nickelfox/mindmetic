@@ -1,38 +1,55 @@
 import React from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  Text,
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Box from "../components/box";
-import { Dimensions, ScrollView } from "react-native";
 
 const IndexScreen = () => {
   return (
-    <ScrollView style={styles.page}>
-      <LinearGradient
-        start={[0.9, 0.9]}
-        end={[0.8, 0.4]}
-        colors={["#2E3841", "#0D1517"]}
-      >
-        <Text style={[styles.text, { fontWeight: "100" }]}>WELCOME</Text>
-        <Text style={styles.smallText}>TO MINDMETIC</Text>
-        <View>
-          <View style={styles.display}>
-            <Box name="MENTAL MATHS" icon="user-cog" move="MentalMaths" />
+    <>
+      <View style={styles.page}>
+        <LinearGradient
+          start={[0.5, 0]}
+          end={[0.5, 0.5]}
+          colors={["#495057", "#0D1517"]}
+        >
+          <Text style={[styles.text, { fontWeight: "100" }]}>WELCOME</Text>
+          <Text style={styles.smallText}>TO MINDMETIC</Text>
+          <View>
+            <View style={styles.display}>
+              <Box
+                name="MENTAL MATHS"
+                icon="user-cog"
+                move="MentalMaths"
+                border={false}
+              />
 
-            <View style={styles.middle}></View>
+              <View style={styles.middle}></View>
 
-            <Box name="BRAIN TEASERS" icon="gripfire" move="BrainTeasers" />
+              <Box
+                name="BRAIN TEASERS"
+                icon="gripfire"
+                move="BrainTeasers"
+                border={false}
+              />
+            </View>
+
+            <View style={styles.display}>
+              <Box name="TIPS n TRICKS" icon="magic" move="TipsnTricks" />
+
+              <View style={styles.middle}></View>
+
+              <Box name="BRAINS OUT" icon="brain" move="BrainsOut" />
+            </View>
           </View>
-
-          <View style={styles.display}>
-            <Box name="TIPS n TRICKS" icon="magic" move="TipsnTricks" />
-
-            <View style={styles.middle}></View>
-
-            <Box name="BRAINS OUT" icon="brain" move="BrainsOut" />
-          </View>
-        </View>
-      </LinearGradient>
-    </ScrollView>
+        </LinearGradient>
+      </View>
+    </>
   );
 };
 const styles = StyleSheet.create({
@@ -53,7 +70,7 @@ const styles = StyleSheet.create({
     marginTop: 30,
   },
   smallText: {
-    color: "#FAFEFF",
+    color: "#6EECB3",
     alignSelf: "center",
     fontWeight: "bold",
     fontSize: 20,

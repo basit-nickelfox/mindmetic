@@ -7,7 +7,7 @@ import BrainsOut from "./src/screens/BrainsOut";
 import BrainTeasers from "./src/screens/BrainTeasers";
 import MentalMaths from "./src/screens/MentalMaths";
 import TipsnTricks from "./src/screens/TipsnTricks";
-
+import MathsOptions from "./src/screens/MathsOptions";
 const Stack = createStackNavigator();
 export default function App() {
   return (
@@ -33,7 +33,16 @@ export default function App() {
         />
         <Stack.Screen name="BrainsOut" component={BrainsOut} />
         <Stack.Screen name="BrainTeasers" component={BrainTeasers} />
-        <Stack.Screen name="MentalMaths" component={MentalMaths} />
+        <Stack.Screen
+          name="MentalMaths"
+          options={{ headerShown: false }}
+          component={MentalMaths}
+        />
+        <Stack.Screen
+          name="MathsOptions"
+          options={{ headerShown: false }}
+          component={MathsOptions}
+        />
         <Stack.Screen name="TipsnTricks" component={TipsnTricks} />
       </Stack.Navigator>
     </NavigationContainer>
