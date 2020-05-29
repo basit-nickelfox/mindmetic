@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-
+import Level from "../components/level";
 const MathsOptions = ({ route, navigation }) => {
   var { operation } = route.params;
+  const [levelValue, setLevelValue] = useState(0);
 
   switch (operation) {
     case "ADDITION":
@@ -18,6 +19,10 @@ const MathsOptions = ({ route, navigation }) => {
     default:
       operation = "division";
   }
+  const selectLevel = (val) => {
+    setLevelValue(val);
+  };
+
   return (
     // <View style={styles.topView}>
     <>
@@ -31,9 +36,8 @@ const MathsOptions = ({ route, navigation }) => {
           style={styles.image}
           source={require("../../assets/select2.jpg")}
         />
-        <View style={styles.details}>
-          <Text style={styles.text}>SELECT DIGITS LEVEL</Text>
-        </View>
+        <Level getVal={selectLevel} />
+
         <View style={styles.display}>
           <View style={styles.display1}>
             <TouchableOpacity
@@ -41,6 +45,7 @@ const MathsOptions = ({ route, navigation }) => {
                 navigation.navigate("PlayMaths", {
                   digits: 1,
                   icon: operation,
+                  level: levelValue,
                 })
               }
             >
@@ -51,11 +56,17 @@ const MathsOptions = ({ route, navigation }) => {
                 navigation.navigate("PlayMaths", {
                   icon: operation,
                   digits: 2,
+                  level: levelValue,
                 })
               }
             >
               <Text style={styles.innerText}>2</Text>
             </TouchableOpacity>
+          </View>
+          <View style={styles.details}>
+            <Text style={[styles.text, { color: "white", marginBottom: 8 }]}>
+              SELECT DIGITS LEVEL
+            </Text>
           </View>
           <View style={styles.display2}>
             <TouchableOpacity
@@ -63,6 +74,7 @@ const MathsOptions = ({ route, navigation }) => {
                 navigation.navigate("PlayMaths", {
                   icon: operation,
                   digits: 3,
+                  level: levelValue,
                 })
               }
             >
@@ -73,6 +85,7 @@ const MathsOptions = ({ route, navigation }) => {
                 navigation.navigate("PlayMaths", {
                   icon: operation,
                   digits: 4,
+                  level: levelValue,
                 })
               }
             >
@@ -103,7 +116,7 @@ const styles = StyleSheet.create({
     fontSize: 45,
     // width: 100,
     // height: 100,
-    margin: 28,
+    margin: 15,
     textAlign: "center",
     textAlignVertical: "center",
     borderRadius: 60,
@@ -130,7 +143,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   image: {
-    height: "50%",
+    height: "47%",
     width: "100%",
     borderBottomLeftRadius: 250,
     borderBottomRightRadius: 250,

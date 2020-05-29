@@ -28,14 +28,14 @@ const PlayMaths = ({ route, navigation }) => {
   const input = useRef(null);
   const soundClean = useRef(true);
   const [endResult, setEndResult] = useState(null);
-  const { icon, digits } = route.params;
-
+  const { icon, digits, level } = route.params;
   // console.log("this is render");
   // console.log(digits);
   let digit1;
   let digit2;
   let result;
   let prevResult;
+  let font;
   useEffect(() => {
     soundClean.current = true;
     return () => {
@@ -53,23 +53,27 @@ const PlayMaths = ({ route, navigation }) => {
   //   console.log("in Use Effect");
   switch (digits) {
     case 1:
-      digit1 = getRndInteger(1, 9);
-      digit2 = getRndInteger(1, 9);
+      digit1 = getRndInteger(1, 9, level);
+      digit2 = getRndInteger(1, 9, level);
+      font = 100;
       break;
     case 2:
-      digit1 = getRndInteger(10, 99);
-      digit2 = getRndInteger(10, 99);
+      digit1 = getRndInteger(10, 99, level);
+      digit2 = getRndInteger(10, 99, level);
+      font = 90;
       break;
     case 3:
-      digit1 = getRndInteger(100, 999);
-      digit2 = getRndInteger(100, 999);
+      digit1 = getRndInteger(100, 999, level);
+      digit2 = getRndInteger(100, 999, level);
+      font = 80;
       break;
     default:
-      digit1 = getRndInteger(1000, 9999);
-      digit2 = getRndInteger(1000, 9999);
+      digit1 = getRndInteger(1000, 9999, level);
+      digit2 = getRndInteger(1000, 9999, level);
+      font = 70;
   }
   //  useEffect(() => {
-  //   console.log("in Use Effect");
+  console.log(font);
   switch (icon) {
     case "plus":
       result = digit1 + digit2;
@@ -84,15 +88,24 @@ const PlayMaths = ({ route, navigation }) => {
       result = digit1 / digit2;
   }
   // }, []);
-  function getRndInteger(min, max) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
+  // function getRndInteger(min, max) {
+  //   return Math.floor(Math.random() * (max - min + 1)) + min;
+  // }
+  function getRndInteger(min, max, decimalPlaces) {
+    var rand = Math.random() * (max - min) + min;
+    var power = Math.pow(10, decimalPlaces);
+    console.log(rand);
+    console.log(power);
+    if (decimalPlaces === 0) {
+      return Math.floor(rand * power) / power;
+    } else if (decimalPlaces === 1) {
+      return (Math.floor(rand * power) / power).toFixed(1);
+    } else {
+      return (Math.floor(rand * power) / power).toFixed(2);
+    }
   }
 
   const handelSubmit = async (e) => {
-    // console.log(result);
-    // console.log(e.nativeEvent.text);
-    // console.log(digit1);
-    // console.log(digit2);
     const soundObject = new Audio.Sound();
 
     if (result == e.nativeEvent.text) {
@@ -154,8 +167,10 @@ const PlayMaths = ({ route, navigation }) => {
             size={150}
           />
           <View style={styles.innerMain}>
-            <Text style={styles.text}>{digit1}</Text>
-            <Text style={[styles.text, { borderBottomWidth: 1 }]}>
+            <Text style={[styles.text, { fontSize: font }]}>{digit1}</Text>
+            <Text
+              style={[styles.text, { borderBottomWidth: 1, fontSize: font }]}
+            >
               {digit2}
             </Text>
             {/* <Text style={styles.result}>{result}</Text> */}
@@ -172,7 +187,7 @@ const PlayMaths = ({ route, navigation }) => {
             />
           </View>
         </View>
-        {/* <TouchableOpacity onPress={() => calculate()}> */}
+
         <Text
           style={[
             styles.resultCheck,
@@ -183,7 +198,6 @@ const PlayMaths = ({ route, navigation }) => {
         >
           {resultVal}
         </Text>
-        {/* </TouchableOpacity> */}
       </LinearGradient>
     </>
   );
@@ -211,7 +225,7 @@ const styles = StyleSheet.create({
   text: {
     color: "#FAFEFF",
     fontWeight: "bold",
-    fontSize: 130,
+    // fontSize: 100,
     fontFamily: "sans-serif-thin",
     justifyContent: "space-around",
     borderColor: "#6EECB3",
