@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "mindmetic",
-    "slug": "mindmetic",
+    "name": "Mindmetic",
+    "slug": "Mindmetic",
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",
