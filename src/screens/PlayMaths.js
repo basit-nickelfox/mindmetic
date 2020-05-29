@@ -24,28 +24,26 @@ const PlayMaths = ({ route, navigation }) => {
   // resultVal === "Correct" || resultVal === null
   //   ? navigation.setParams({ headerColor: "green" })
   //   : null;
-  console.log(navigation);
+  // console.log(navigation);
   const input = useRef(null);
   const soundClean = useRef(true);
   const [endResult, setEndResult] = useState(null);
   const { icon, digits } = route.params;
 
-  console.log("this is render");
+  // console.log("this is render");
   // console.log(digits);
   let digit1;
   let digit2;
   let result;
-  let copy1;
-  let copy2;
-
+  let prevResult;
   useEffect(() => {
     soundClean.current = true;
     return () => {
-      copy1 = digit1;
-      copy2 = digit2;
       soundClean.current = false;
-      console.log(digit1, digit2);
-      console.log(soundClean.current);
+
+      prevResult = resultVal;
+      // console.log(prevResult);
+      // console.log(soundClean.current);
 
       // soundObject.unloadAsync();
       // soundObject = new Audio.Sound();
@@ -91,13 +89,14 @@ const PlayMaths = ({ route, navigation }) => {
   }
 
   const handelSubmit = async (e) => {
-    console.log(result);
-    console.log(e.nativeEvent.text);
-    console.log(digit1);
-    console.log(digit2);
+    // console.log(result);
+    // console.log(e.nativeEvent.text);
+    // console.log(digit1);
+    // console.log(digit2);
     const soundObject = new Audio.Sound();
 
     if (result == e.nativeEvent.text) {
+      setResult("Correct");
       try {
         // await Audio.setIsEnabledAsync(true);
         if (soundClean.current) {
@@ -111,9 +110,8 @@ const PlayMaths = ({ route, navigation }) => {
       } catch (err) {
         console.warn("Couldn't Play audio", err);
       }
-
-      setResult("Correct");
     } else {
+      setResult("Wrong");
       try {
         // await Audio.setIsEnabledAsync(true);
         if (soundClean.current) {
@@ -128,16 +126,16 @@ const PlayMaths = ({ route, navigation }) => {
         console.warn("Couldn't Play audio", err);
       }
 
-      Vibration.vibrate(500);
-
-      setResult("Wrong");
+      Vibration.vibrate(400);
     }
     // soundObject.stopAsync();
     if (input.current) {
       input.current.clear();
       // input.current.focus();
     }
-    setEndResult(result);
+    if (prevResult !== resultVal) {
+      setEndResult(Math.random());
+    }
     // setTerm(null);
   };
 
