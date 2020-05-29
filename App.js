@@ -8,6 +8,7 @@ import BrainTeasers from "./src/screens/BrainTeasers";
 import MentalMaths from "./src/screens/MentalMaths";
 import TipsnTricks from "./src/screens/TipsnTricks";
 import MathsOptions from "./src/screens/MathsOptions";
+import PlayMaths from "./src/screens/PlayMaths";
 const Stack = createStackNavigator();
 export default function App() {
   return (
@@ -16,7 +17,7 @@ export default function App() {
         initialRouteName="Index"
         screenOptions={{
           headerStyle: {
-            backgroundColor: "#0B1013",
+            backgroundColor: "#495057",
             // backgroundColor: "#69687f",
           },
           headerTintColor: "#FCFFFF",
@@ -44,6 +45,18 @@ export default function App() {
           component={MathsOptions}
         />
         <Stack.Screen name="TipsnTricks" component={TipsnTricks} />
+        <Stack.Screen
+          name="PlayMaths"
+          // options={{
+          //   title: "Mental Maths",
+          // }}
+          options={({ route }) => ({
+            title: "Mental Maths",
+            // headerStyle: { backgroundColor: route.params.backgroundColor },
+            // headerTintColor: "red",
+          })}
+          component={PlayMaths}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );

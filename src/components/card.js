@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
@@ -20,7 +14,7 @@ const Card = (props) => {
         })
       }
     >
-      <View>
+      <View style={{ height: "100%" }}>
         <LinearGradient
           style={[styles.card]}
           start={[0.5, 0]}
@@ -67,6 +61,7 @@ const styles = StyleSheet.create({
   },
   topView: {
     flex: 4,
+    height: "100%",
   },
   text: {
     color: "#FAFEFF",
