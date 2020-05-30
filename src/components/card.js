@@ -14,7 +14,7 @@ const Card = (props) => {
         })
       }
     >
-      <View style={{ height: "100%" }}>
+      <View style={{ height: "100%", paddingTop: 0 }}>
         <LinearGradient
           style={[styles.card]}
           start={[0.5, 0]}
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     // borderWidth: 1,
   },
   topView: {
-    flex: 4,
+    flex: 6,
     height: "100%",
   },
   text: {

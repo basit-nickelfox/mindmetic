@@ -50,11 +50,7 @@ export default function App() {
           // options={{
           //   title: "Mental Maths",
           // }}
-          options={({ route }) => ({
-            title: "Mental Maths",
-            // headerStyle: { backgroundColor: route.params.backgroundColor },
-            // headerTintColor: "red",
-          })}
+          options={({ route }) => ({ title: route.params.name })}
           component={PlayMaths}
         />
       </Stack.Navigator>

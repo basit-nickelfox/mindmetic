@@ -5,16 +5,24 @@ import Level from "../components/level";
 const MathsOptions = ({ route, navigation }) => {
   var { operation } = route.params;
   const [levelValue, setLevelValue] = useState(0);
-
+  var header = operation;
   switch (operation) {
     case "ADDITION":
       operation = "plus";
+
       break;
     case "SUBTRACTION":
       operation = "minus";
       break;
     case "MULTIPLICATION":
       operation = "multiplication";
+      break;
+
+    case "SQUARE ROOT":
+      operation = "square-root";
+      break;
+    case "CUBE ROOT":
+      operation = "cube-outline";
       break;
     default:
       operation = "division";
@@ -46,6 +54,7 @@ const MathsOptions = ({ route, navigation }) => {
                   digits: 1,
                   icon: operation,
                   level: levelValue,
+                  title: header,
                 })
               }
             >
@@ -57,6 +66,7 @@ const MathsOptions = ({ route, navigation }) => {
                   icon: operation,
                   digits: 2,
                   level: levelValue,
+                  title: header,
                 })
               }
             >
@@ -75,6 +85,7 @@ const MathsOptions = ({ route, navigation }) => {
                   icon: operation,
                   digits: 3,
                   level: levelValue,
+                  title: header,
                 })
               }
             >
@@ -86,6 +97,7 @@ const MathsOptions = ({ route, navigation }) => {
                   icon: operation,
                   digits: 4,
                   level: levelValue,
+                  title: header,
                 })
               }
             >

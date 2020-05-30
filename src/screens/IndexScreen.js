@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
+  StatusBar,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import Box from "../components/box";
@@ -49,6 +50,7 @@ const IndexScreen = () => {
           </View>
         </LinearGradient>
       </View>
+      <StatusBar backgroundColor="#495057" />
     </>
   );
 };

@@ -6,14 +6,17 @@ import {
   TouchableOpacity,
   TextInput,
   Vibration,
+  StatusBar,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Audio } from "expo-av";
 
 const PlayMaths = ({ route, navigation }) => {
+  const { icon, digits, level, title } = route.params;
   const [resultVal, setResult] = useState(null);
   navigation.setOptions({
+    title: title,
     headerStyle:
       resultVal === "Correct" || resultVal === null
         ? { backgroundColor: "#93f5a6" }
@@ -28,7 +31,7 @@ const PlayMaths = ({ route, navigation }) => {
   const input = useRef(null);
   const soundClean = useRef(true);
   const [endResult, setEndResult] = useState(null);
-  const { icon, digits, level } = route.params;
+
   // console.log("this is render");
   // console.log(digits);
   let digit1;
@@ -55,37 +58,46 @@ const PlayMaths = ({ route, navigation }) => {
     case 1:
       digit1 = getRndInteger(1, 9, level);
       digit2 = getRndInteger(1, 9, level);
-      font = 100;
+      font = 90;
       break;
     case 2:
       digit1 = getRndInteger(10, 99, level);
       digit2 = getRndInteger(10, 99, level);
-      font = 90;
+      font = 80;
       break;
     case 3:
       digit1 = getRndInteger(100, 999, level);
       digit2 = getRndInteger(100, 999, level);
-      font = 80;
+      font = 70;
       break;
     default:
       digit1 = getRndInteger(1000, 9999, level);
       digit2 = getRndInteger(1000, 9999, level);
-      font = 70;
+      font = 60;
   }
   //  useEffect(() => {
-  console.log(font);
+  // console.log(font);
   switch (icon) {
     case "plus":
-      result = digit1 + digit2;
+      // console.log(typeof parseFloat(digit1));
+      // console.log(digit2);
+      result = parseFloat(digit1) + parseFloat(digit2);
+
       break;
     case "minus":
-      result = digit1 - digit2;
+      result = parseFloat(digit1) - parseFloat(digit2);
       break;
     case "multiplication":
-      result = digit1 * digit2;
+      result = parseFloat(digit1) * parseFloat(digit2);
+      break;
+    case "square-root":
+      result = Math.sqrt(digit2).toFixed(2);
+      break;
+    case "cube-outline":
+      result = Math.cbrt(digit2).toFixed(2);
       break;
     default:
-      result = digit1 / digit2;
+      result = (parseFloat(digit1) / parseFloat(digit2)).toFixed(2);
   }
   // }, []);
   // function getRndInteger(min, max) {
@@ -94,21 +106,20 @@ const PlayMaths = ({ route, navigation }) => {
   function getRndInteger(min, max, decimalPlaces) {
     var rand = Math.random() * (max - min) + min;
     var power = Math.pow(10, decimalPlaces);
-    console.log(rand);
-    console.log(power);
     if (decimalPlaces === 0) {
       return Math.floor(rand * power) / power;
     } else if (decimalPlaces === 1) {
-      return (Math.floor(rand * power) / power).toFixed(1);
+      return parseFloat(Math.floor(rand * power) / power).toFixed(1);
     } else {
-      return (Math.floor(rand * power) / power).toFixed(2);
+      return parseFloat(Math.floor(rand * power) / power).toFixed(2);
     }
   }
 
   const handelSubmit = async (e) => {
     const soundObject = new Audio.Sound();
-
-    if (result == e.nativeEvent.text) {
+    console.log("Ans:", result);
+    console.log("given:", parseFloat(e.nativeEvent.text));
+    if (result == parseFloat(e.nativeEvent.text)) {
       setResult("Correct");
       try {
         // await Audio.setIsEnabledAsync(true);
@@ -167,17 +178,21 @@ const PlayMaths = ({ route, navigation }) => {
             size={150}
           />
           <View style={styles.innerMain}>
-            <Text style={[styles.text, { fontSize: font }]}>{digit1}</Text>
+            {icon === "cube-outline" || icon === "square-root" ? null : (
+              <Text style={[styles.text, { fontSize: font }]}>{digit1}</Text>
+            )}
+
             <Text
               style={[styles.text, { borderBottomWidth: 1, fontSize: font }]}
             >
               {digit2}
             </Text>
+
             {/* <Text style={styles.result}>{result}</Text> */}
             <TextInput
               ref={input}
               style={styles.result}
-              placeholder="***"
+              placeholder="**"
               keyboardType="numeric"
               autoFocus={true}
               blurOnSubmit={false}
@@ -187,7 +202,11 @@ const PlayMaths = ({ route, navigation }) => {
             />
           </View>
         </View>
-
+        {icon === "square-root" || icon === "cube-outline" ? (
+          <Text style={styles.note}>
+            NOTE : Give the solution upto 2 decimal places
+          </Text>
+        ) : null}
         <Text
           style={[
             styles.resultCheck,
@@ -199,10 +218,16 @@ const PlayMaths = ({ route, navigation }) => {
           {resultVal}
         </Text>
       </LinearGradient>
+      <StatusBar
+        backgroundColor={
+          resultVal === "Correct" || resultVal === null ? "#93f5a6" : "#f27272"
+        }
+      />
     </>
   );
 };
 const styles = StyleSheet.create({
+  note: { color: "white", textAlign: "center" },
   resultCheck: {
     // backgroundColor: "#6EECB3",
     color: "white",
@@ -219,8 +244,10 @@ const styles = StyleSheet.create({
     fontSize: 40,
     fontFamily: "sans-serif-thin",
     marginRight: 10,
+    // alignSelf: "flex-start",
     // borderColor: "orange",
     // borderWidth: 1,
+    // paddingLeft: 50,
   },
   text: {
     color: "#FAFEFF",
