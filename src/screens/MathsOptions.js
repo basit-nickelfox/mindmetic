@@ -44,8 +44,9 @@ const MathsOptions = ({ route, navigation }) => {
           style={styles.image}
           source={require("../../assets/select2.jpg")}
         />
+        {/* <View style={{ width: Dimensions.get("window").width / 1 }}> */}
         <Level getVal={selectLevel} />
-
+        {/* </View> */}
         <View style={styles.display}>
           <View style={styles.display1}>
             <TouchableOpacity
@@ -74,7 +75,7 @@ const MathsOptions = ({ route, navigation }) => {
             </TouchableOpacity>
           </View>
           <View style={styles.details}>
-            <Text style={[styles.text, { color: "white", marginBottom: 8 }]}>
+            <Text style={[styles.text, { color: "white" }]}>
               SELECT DIGITS LEVEL
             </Text>
           </View>
@@ -110,22 +111,32 @@ const MathsOptions = ({ route, navigation }) => {
   );
 };
 const styles = StyleSheet.create({
-  display: {},
+  display: {
+    // borderColor: "orange",
+    // borderWidth: 1,
+    flex: 1,
+  },
   display1: {
     // borderColor: "orange",
     // borderWidth: 1,
     flexDirection: "row",
     justifyContent: "space-around",
+    alignItems: "center",
+    flex: 1,
   },
   display2: {
     // flexDirection: "column",
+    alignItems: "center",
+    // borderColor: "orange",
+    // borderWidth: 1,
     flexDirection: "row",
     justifyContent: "space-around",
+    flex: 1,
   },
   innerText: {
     backgroundColor: "#6EECB3",
     color: "white",
-    fontSize: 45,
+    fontSize: 40,
     // width: 100,
     // height: 100,
     margin: 15,
@@ -141,17 +152,18 @@ const styles = StyleSheet.create({
   text: {
     color: "#6EECB3",
     fontSize: 20,
-    marginTop: 8,
+    // marginTop: 4,
     fontWeight: "bold",
     // borderColor: "orange",
     // borderWidth: 1,
   },
   details: {
-    color: "white",
+    // color: "white",
     alignSelf: "center",
   },
   topView: {
     // backgroundColor: "black",
+
     height: "100%",
   },
   image: {

@@ -5,7 +5,7 @@ import Card from "../components/card";
 const MentalMath = () => {
   return (
     <>
-      {/* <View style={{ marginTop: 3 }}> */}
+      {/* <View style={{ flex: 1 }}> */}
       <Card
         color1="#a2e882"
         color2="#379e3e"

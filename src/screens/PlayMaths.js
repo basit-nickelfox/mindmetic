@@ -173,9 +173,9 @@ const PlayMaths = ({ route, navigation }) => {
       >
         <View style={styles.main}>
           <MaterialCommunityIcons
-            style={{ color: "#6EECB3", alignSelf: "center" }}
+            style={{ color: "#6EECB3", alignSelf: "center", paddingBottom: 30 }}
             name={icon}
-            size={150}
+            size={font + 60}
           />
           <View style={styles.innerMain}>
             {icon === "cube-outline" || icon === "square-root" ? null : (

@@ -62,7 +62,8 @@ const styles = StyleSheet.create({
   },
   page: {
     backgroundColor: "#0D1517",
-    height: "100%",
+    // height: "100%",
+    flex: 1,
   },
   text: {
     color: "#FAFEFF",

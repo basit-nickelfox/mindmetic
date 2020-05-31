@@ -49,7 +49,8 @@ const Level = ({ getVal }) => {
 };
 const styles = StyleSheet.create({
   topView: {
-    paddingVertical: 15,
+    paddingTop: 18,
+    paddingBottom: 10,
     flexDirection: "row",
     // borderWidth: 1,
     // borderColor: "orange",
@@ -59,15 +60,16 @@ const styles = StyleSheet.create({
   opacity: {
     borderWidth: 1,
     borderColor: "#6EECB3",
-    paddingHorizontal: 30,
+    marginHorizontal: 2,
     paddingVertical: 5,
     // backgroundColor: "red",
     borderRadius: 50,
+    width: "32%",
   },
   text: {
     color: "white",
     fontWeight: "bold",
-    fontSize: 30,
+    fontSize: 22,
     fontFamily: "sans-serif-thin",
     alignSelf: "center",
     textAlignVertical: "center",
