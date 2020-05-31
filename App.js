@@ -14,7 +14,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator
-        initialRouteName="MentalMaths"
+        initialRouteName="Index"
         screenOptions={{
           headerStyle: {
             backgroundColor: "#495057",

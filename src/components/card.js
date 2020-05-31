@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
   },
   topView: {
-    // flex: 1,
+    flex: 1,
     // height: "100%",
   },
   text: {
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     // borderColor: "black",
     // borderWidth: 1,
     // alignItems:'center',
-    // height: "100%",
+
     justifyContent: "center",
     borderTopLeftRadius: 30,
     borderTopRightRadius: 30,
